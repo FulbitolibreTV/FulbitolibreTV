@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor M3U8</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.min.js"></script>
+</head>
+<body>
+    <video id="player" controls autoplay width="100%" height="auto"></video>
+    <script>
+        const video = document.getElementById('player');
+        const videoSrc = "http://zonamovie.live:8080/live/Carlos02/Carlos02/410172.m3u8";
+
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+        } else {
+            alert("Tu navegador no soporta la reproducción de este video.");
+        }
+
+        const player = new Plyr(video, { controls: ['play', 'progress', 'mute', 'volume', 'fullscreen'] });
+    </script>
+</body>
+</html>
