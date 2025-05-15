@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FulbitolibreTV - Espanyol vs Barcelona en vivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .welcome-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .welcome-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .welcome-content h2 {
+            color: #d91a2a; /* La Liga red */
+        }
+        .welcome-content p {
+            color: #333;
+        }
+        .welcome-content a {
+            color: #004aad; /* La Liga blue */
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .welcome-content a:hover {
+            color: #ffc107; /* La Liga yellow */
+        }
+        .welcome-content button {
+            background-color: #d91a2a;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .welcome-content button:hover {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #004aad;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 999;
+        }
+        .popup a {
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .popup a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            background-color: #d91a2a; /* La Liga red */
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .app-promo {
+            text-align: center;
+            padding: 15px;
+            background-color: #004aad; /* La Liga blue */
+            color: #fff;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .app-promo a {
+            color: #ffc107; /* La Liga yellow */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .app-promo a:hover {
+            text-decoration: underline;
+        }
+        .playstore-icon {
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+        .stream-list {
+            padding: 20px;
+        }
+        .stream-list h2 {
+            color: #d91a2a;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .stream-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .stream-list li {
+            margin: 10px 0;
+        }
+        .stream-list a {
+            display: block;
+            padding: 15px;
+            background-color: #004aad;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .stream-list a:hover {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .support {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .support a {
+            color: #004aad;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .support a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #d91a2a;
+            color: #fff;
+            border-radius: 0 0 10px 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-message" id="welcomeMessage">
+        <div class="welcome-content">
+            <h2>Bienvenido a FulbitolibreTV</h2>
+            <p>¡Disfruta de Espanyol vs Barcelona en vivo! Descarga nuestra app <a href="https://www.mediafire.com/file/g2zkdkxjgpsqzol/FulbitolibreTV4.apk/file">FulbitolibreTV4</a> y únete a nuestro grupo de soporte en <a href="https://t.me/Fulbitolibretv">Telegram</a>.</p>
+            <button onclick="closeWelcome()">Entrar</button>
+        </div>
+    </div>
+    <div class="popup" id="popupMessage">
+        <p>¡No te pierdas el partido! Descarga <a href="https://www.mediafire.com/file/g2zkdkxjgpsqzol/FulbitolibreTV4.apk/file">FulbitolibreTV4</a> y únete a nuestro grupo de soporte en <a href="https://t.me/Fulbitolibretv">Telegram</a>.</p>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>FulbitolibreTV</h1>
+            <h2>Espanyol vs Barcelona en vivo</h2>
+        </div>
+        <div class="app-promo">
+            <p>
+                ¡Descarga nuestra app para Android! 
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store Icon" class="playstore-icon">
+                <a href="https://www.mediafire.com/file/g2zkdkxjgpsqzol/FulbitolibreTV4.apk/file">FulbitolibreTV4</a>
+            </p>
+        </div>
+        <div class="stream-list">
+            <h2>Transmisiones en vivo</h2>
+            <ul>
+                <li><a href="https://streamtp4.com/global1.php?stream=eleven1_pt" target="_blank">Eleven 1 PT</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=espn" target="_blank">ESPN</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=espnplus1" target="_blank">ESPN Plus 1</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=espndeportes" target="_blank">ESPN Deportes</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=espnplus2" target="_blank">ESPN Plus 2</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=dsports" target="_blank">DSports</a></li>
+                <li><a href="https://futbollibre.futbol/es/embed/eventos/?r=aHR0cHM6Ly9zdGdydWJlci53b3JsZC9zdHJlYW0yLnBocD9zdHJlYW09ZXNwbmRlcG9ydGVz" target="_blank">ESPN Deportes (Futbol Libre)</a></li>
+                <li><a href="https://futbollibre.futbol/es/embed/eventos/?r=aHR0cHM6Ly93d3cuY2Fwb3BsYXllci5uZXQvcGxheS9jYXBvZGVwb3J0ZXMucGhw" target="_blank">Capo Deportes</a></li>
+            </ul>
+        </div>
+        <div class="support">
+            <p>¿Necesitas ayuda? Únete a nuestro grupo de soporte en <a href="https://t.me/Fulbitolibretv" target="_blank">Telegram</a></p>
+        </div>
+        <footer>
+            <p>© 2025 FulbitolibreTV. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+    <script>
+        // Close welcome message
+        function closeWelcome() {
+            document.getElementById('welcomeMessage').style.display = 'none';
+        }
+
+        // Show popup after 10 seconds
+        setTimeout(function() {
+            document.getElementById('popupMessage').style.display = 'block';
+        }, 10000);
+    </script>
+</body>
+</html>
