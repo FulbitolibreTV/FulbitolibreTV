@@ -16,16 +16,17 @@ function promptLogin() {
 
 // Image upload and carousel with localStorage
 let images = JSON.parse(localStorage.getItem('carouselImages')) || [];
-let currentIndex = 0;
 
 function uploadImages() {
     const fileInput = document.getElementById('imageUpload');
+    const durationInput = document.getElementById('imageDuration');
+    const duration = parseInt(durationInput.value) || 3; // Default to 3 seconds
     const files = fileInput.files;
 
     for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            images.push(e.target.result);
+            images.push({ src: e.target.result, duration: duration * 1000 });
             localStorage.setItem('carouselImages', JSON.stringify(images));
             const carouselContainer = document.getElementById('carouselContainer');
             if (carouselContainer) {
@@ -33,24 +34,44 @@ function uploadImages() {
                 img.src = e.target.result;
                 carouselContainer.appendChild(img);
             }
+            loadImages(); // Update admin image list
         };
         reader.readAsDataURL(files[i]);
     }
 
-    updateCarousel();
+    fileInput.value = '';
+    durationInput.value = '';
 }
 
 // Load saved images from localStorage
 function loadImages() {
     const carouselContainer = document.getElementById('carouselContainer');
+    const imageList = document.getElementById('imageList');
+
     if (carouselContainer) {
-        images.forEach(src => {
+        carouselContainer.innerHTML = '';
+        images.forEach(image => {
             const img = document.createElement('img');
-            img.src = src;
+            img.src = image.src;
             carouselContainer.appendChild(img);
         });
         updateCarousel();
     }
+
+    if (imageList) {
+        imageList.innerHTML = '';
+        images.forEach((image, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<img src="${image.src}" alt="Carousel Image"> Duración: ${image.duration / 1000}s <button onclick="deleteImage(${index})">Eliminar</button>`;
+            imageList.appendChild(li);
+        });
+    }
+}
+
+function deleteImage(index) {
+    images.splice(index, 1);
+    localStorage.setItem('carouselImages', JSON.stringify(images));
+    loadImages();
 }
 
 function updateCarousel() {
@@ -61,7 +82,7 @@ function updateCarousel() {
         setTimeout(() => {
             currentIndex = (currentIndex + 1) % images.length;
             updateCarousel();
-        }, 3000); // Change image every 3 seconds
+        }, images[currentIndex].duration); // Use image-specific duration
     }
 }
 
@@ -166,6 +187,7 @@ function loadAnnouncements() {
 }
 
 // Load data on page load
+let currentIndex = 0;
 window.onload = function() {
     loadImages();
     loadEvents();
