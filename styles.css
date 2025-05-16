@@ -219,6 +219,27 @@ body {
     border-radius: 5px;
 }
 
+.announcements {
+    margin: 20px 0;
+}
+
+.announcements h2 {
+    color: #d91a2a;
+    text-align: center;
+}
+
+.announcements ul {
+    list-style: none;
+    padding: 0;
+}
+
+.announcements li {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
 .iptv-promo {
     text-align: center;
     padding: 15px;
@@ -313,9 +334,18 @@ body {
     margin: 20px 0;
 }
 
-.admin-panel h2 {
+.admin-panel h2, .admin-panel h3 {
     color: #d91a2a;
     text-align: center;
+}
+
+.admin-panel input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .admin-panel button {
@@ -331,6 +361,27 @@ body {
 .admin-panel button:hover {
     background-color: #ffc107;
     color: #000;
+}
+
+.admin-panel ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-panel li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-panel li button {
+    background-color: #d91a2a;
+    padding: 5px 10px;
+    font-size: 0.9em;
 }
 
 footer {
