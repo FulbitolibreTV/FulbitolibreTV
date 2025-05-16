@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FulbitolibreTV - Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hamburger-menu">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="hamburger-icon">☰</label>
+        <div class="menu">
+            <a href="index.html">Inicio</a>
+            <a href="index.html#events">Eventos</a>
+            <a href="index.html#iptv">Servicio IPTV</a>
+            <a href="#" onclick="promptLogin()">Iniciar Sesión</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="admin-panel" id="adminPanel">
+            <h2>Hola, bienvenido</h2>
+            <h3>Subir imágenes para el carrusel</h3>
+            <input type="file" id="imageUpload" accept="image/*" multiple>
+            <button onclick="uploadImages()">Subir Imágenes</button>
+            <h3>Gestión de Eventos</h3>
+            <input type="text" id="eventTime" placeholder="Hora (ej. 21:00)">
+            <input type="text" id="eventTitle" placeholder="Título (ej. Copa Sudamericana: Equipo vs Equipo)">
+            <input type="text" id="eventLink" placeholder="Enlace de transmisión">
+            <input type="text" id="eventChannel" placeholder="Canal (ej. ESPN)">
+            <button onclick="addEvent()">Agregar Evento</button>
+            <ul id="adminEventList"></ul>
+            <h3>Gestión de Anuncios</h3>
+            <input type="text" id="announcementText" placeholder="Texto del anuncio">
+            <button onclick="addAnnouncement()">Agregar Anuncio</button>
+            <ul id="adminAnnouncementList"></ul>
+            <button onclick="window.open('https://wa.me/+12675813364?text=Hola%2C%20quiero%20adquirir%20el%20servicio%20de%20IPTV', '_blank')">Contactar a Soporte</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Password protection for admin panel
+        window.onload = function() {
+            const password = prompt("Ingresa la contraseña para iniciar sesión:");
+            if (password !== "Josejavier20") {
+                alert("Contraseña incorrecta");
+                window.location.href = "index.html";
+            } else {
+                document.getElementById('adminPanel').style.display = 'block';
+                loadEvents();
+                loadAnnouncements();
+            }
+        };
+    </script>
+</body>
+</html>
