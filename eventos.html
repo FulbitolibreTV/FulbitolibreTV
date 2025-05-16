@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FulbitolibreTV - Eventos Deportivos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .welcome-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .welcome-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .welcome-content h2 {
+            color: #d91a2a; /* La Liga red */
+        }
+        .welcome-content p {
+            color: #333;
+        }
+        .welcome-content a {
+            color: #004aad; /* La Liga blue */
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .welcome-content a:hover {
+            color: #ffc107; /* La Liga yellow */
+        }
+        .welcome-content button {
+            background-color: #d91a2a;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .welcome-content button:hover {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #004aad;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 999;
+        }
+        .popup a {
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .popup a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            background-color: #d91a2a; /* La Liga red */
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .app-promo {
+            text-align: center;
+            padding: 15px;
+            background-color: #004aad; /* La Liga blue */
+            color: #fff;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .app-promo a {
+            color: #ffc107; /* La Liga yellow */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .app-promo a:hover {
+            text-decoration: underline;
+        }
+        .mediafire-icon {
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+        .stream-list {
+            padding: 20px;
+        }
+        .stream-list h2 {
+            color: #d91a2a;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .stream-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .stream-list li {
+            margin: 10px 0;
+        }
+        .stream-list a {
+            display: block;
+            padding: 15px;
+            background-color: #004aad;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .stream-list a:hover {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .vpn-note {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+        .vpn-note a {
+            color: #004aad;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .vpn-note a:hover {
+            color: #ffc107;
+        }
+        .support {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .support a {
+            color: #004aad;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .support a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #d91a2a;
+            color: #fff;
+            border-radius: 0 0 10px 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-message" id="welcomeMessage">
+        <div class="welcome-content">
+            <h2>Bienvenido a FulbitolibreTV</h2>
+            <p>¡Disfruta de los mejores eventos deportivos! Descarga nuestra app <a href="https://www.mediafire.com/file/g2zkdkxjgpsqzol/FulbitolibreTV4.apk/file">FulbitolibreTV4</a> y únete a nuestro grupo de soporte en <a href="https://t.me/Fulbitolibretv">Telegram</a>.</p>
+            <button onclick="closeWelcome()">Entrar</button>
+        </div>
+    </div>
+    <div class="popup" id="popupMessage">
+        <p>¡No te pierdas los eventos! Descarga <a href="https://www.mediafire.com/file/g2zkdkxjgpsqzol/FulbitolibreTV4.apk/file">FulbitolibreTV4</a> y únete a nuestro grupo de soporte en <a href="https://t.me/Fulbitolibretv">Telegram</a>.</p>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>FulbitolibreTV</h1>
+            <h2>Eventos Deportivos</h2>
+        </div>
+        <div class="app-promo">
+            <p>
+                ¡Descarga nuestra app para Android (sin anuncios)! 
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/MediaFire_logo.svg" alt="MediaFire Icon" class="mediafire-icon">
+                <a href="https://www.mediafire.com/file/g2zkdkxjgpsqzol/FulbitolibreTV4.apk/file">FulbitolibreTV4</a>
+            </p>
+        </div>
+        <div class="stream-list">
+            <h2>Transmisiones en vivo</h2>
+            <p style="text-align: center; color: #d91a2a;">Recomendamos descargar nuestra app FulbitolibreTV4, ya que es libre de anuncios. Algunos enlaces web pueden contener anuncios.</p>
+            <ul>
+                <li><a href="https://streamtp4.com/global1.php?stream=espn" target="_blank">21:00 - Copa Sudamericana: Once Caldas vs Gualberto Villarroel SJ (ESPN)</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=dsportsplus" target="_blank">21:00 - Copa Sudamericana: Cienciano vs Deportes Iquique (DSports Plus)</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=tudn_usa" target="_blank">21:00 - Liga MX: Cruz Azul vs América (TUDN USA)</a></li>
+                <li><a href="https://streamtp4.com/global1.php?stream=canal5mx" target="_blank">21:00 - Liga MX: Cruz Azul vs América (Canal 5 MX)</a></li>
+            </ul>
+            <div class="vpn-note">
+                <p>Si los enlaces no funcionan, te recomendamos usar una VPN configurada en México. Descarga una VPN desde Google Play: 
+                    <a href="https://play.google.com/store/apps/details?id=com.nordvpn.android">NordVPN</a> o 
+                    <a href="https://play.google.com/store/apps/details?id=com.expressvpn.vpn">ExpressVPN</a>.
+                </p>
+            </div>
+        </div>
+        <div class="support">
+            <p>¿Necesitas ayuda? Únete a nuestro grupo de soporte en <a href="https://t.me/Fulbitolibretv" target="_blank">Telegram</a></p>
+        </div>
+        <footer>
+            <p>Gracias por preferirnos. © 2025 FulbitolibreTV. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+    <script>
+        // Close welcome message
+        function closeWelcome() {
+            document.getElementById('welcomeMessage').style.display = 'none';
+        }
+
+        // Show popup after 10 seconds
+        setTimeout(function() {
+            document.getElementById('popupMessage').style.display = 'block';
+        }, 10000);
+    </script>
+</body>
+</html>
