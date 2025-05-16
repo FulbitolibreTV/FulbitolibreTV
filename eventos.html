@@ -12,6 +12,21 @@
             padding: 0;
             color: #333;
         }
+        .navbar {
+            background-color: #d91a2a; /* La Liga red */
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .navbar a:hover {
+            color: #ffc107; /* La Liga yellow */
+        }
         .welcome-message {
             position: fixed;
             top: 0;
@@ -33,7 +48,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .welcome-content h2 {
-            color: #d91a2a; /* La Liga red */
+            color: #d91a2a;
         }
         .welcome-content p {
             color: #333;
@@ -44,7 +59,7 @@
             text-decoration: none;
         }
         .welcome-content a:hover {
-            color: #ffc107; /* La Liga yellow */
+            color: #ffc107;
         }
         .welcome-content button {
             background-color: #d91a2a;
@@ -90,7 +105,7 @@
         }
         .header {
             text-align: center;
-            background-color: #d91a2a; /* La Liga red */
+            background-color: #d91a2a;
             color: #fff;
             padding: 20px;
             border-radius: 10px 10px 0 0;
@@ -102,13 +117,13 @@
         .app-promo {
             text-align: center;
             padding: 15px;
-            background-color: #004aad; /* La Liga blue */
+            background-color: #004aad;
             color: #fff;
             margin: 20px 0;
             border-radius: 5px;
         }
         .app-promo a {
-            color: #ffc107; /* La Liga yellow */
+            color: #ffc107;
             text-decoration: none;
             font-weight: bold;
         }
@@ -120,6 +135,38 @@
             width: 24px;
             height: 24px;
             margin-right: 5px;
+        }
+        .carousel {
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .iptv-promo {
+            text-align: center;
+            padding: 15px;
+            background-color: #004aad;
+            color: #fff;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .iptv-promo a {
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .iptv-promo a:hover {
+            text-decoration: underline;
         }
         .stream-list {
             padding: 20px;
@@ -176,6 +223,30 @@
         .support a:hover {
             text-decoration: underline;
         }
+        .admin-panel {
+            display: none;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .admin-panel h2 {
+            color: #d91a2a;
+            text-align: center;
+        }
+        .admin-panel button {
+            background-color: #004aad;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .admin-panel button:hover {
+            background-color: #ffc107;
+            color: #000;
+        }
         footer {
             text-align: center;
             padding: 10px;
@@ -187,6 +258,12 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="#home">Inicio</a>
+        <a href="#events">Eventos</a>
+        <a href="#iptv">Servicio IPTV</a>
+        <a href="#" onclick="promptLogin()">Panel de Control</a>
+    </div>
     <div class="welcome-message" id="welcomeMessage">
         <div class="welcome-content">
             <h2>Bienvenido a FulbitolibreTV</h2>
@@ -208,6 +285,23 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/MediaFire_logo.svg" alt="MediaFire Icon" class="mediafire-icon">
                 <a href="https://www.mediafire.com/file/g2zkdkxjgpsqzol/FulbitolibreTV4.apk/file">FulbitolibreTV4</a>
             </p>
+        </div>
+        <div class="carousel" id="carousel">
+            <div class="carousel-container" id="carouselContainer">
+                <!-- Images will be added here dynamically -->
+            </div>
+        </div>
+        <div class="iptv-promo" id="iptv">
+            <h3>¡Contrata nuestro servicio de IPTV!</h3>
+            <p>Disfruta de los mejores canales por solo $30/mes o €30/mes. ¡Ofertas especiales para planes de 6 y 12 meses!</p>
+            <p>Contáctanos por WhatsApp (solo mensajes de texto, no llamadas): <a href="https://wa.me/+12675813364?text=Hola%2C%20quiero%20adquirir%20el%20servicio%20de%20IPTV" target="_blank">+12675813364</a></p>
+        </div>
+        <div class="admin-panel" id="adminPanel">
+            <h2>Hola, bienvenido</h2>
+            <p>Sube imágenes para el carrusel:</p>
+            <input type="file" id="imageUpload" accept="image/*" multiple>
+            <button onclick="uploadImages()">Subir Imágenes</button>
+            <button onclick="window.open('https://wa.me/+12675813364?text=Hola%2C%20quiero%20adquirir%20el%20servicio%20de%20IPTV', '_blank')">Contactar a Soporte</button>
         </div>
         <div class="stream-list">
             <h2>Transmisiones en vivo</h2>
@@ -242,6 +336,44 @@
         setTimeout(function() {
             document.getElementById('popupMessage').style.display = 'block';
         }, 10000);
+
+        // Admin panel login
+        function promptLogin() {
+            const password = prompt("Ingresa la contraseña para el panel de control:");
+            if (password === "Josejavier20") {
+                document.getElementById('adminPanel').style.display = 'block';
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        }
+
+        // Image upload and carousel
+        let images = [];
+        let currentIndex = 0;
+
+        function uploadImages() {
+            const fileInput = document.getElementById('imageUpload');
+            const files = fileInput.files;
+            const carouselContainer = document.getElementById('carouselContainer');
+
+            for (let i = 0; i < files.length; i++) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(files[i]);
+                images.push(img);
+                carouselContainer.appendChild(img);
+            }
+
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const carouselContainer = document.getElementById('carouselContainer');
+            carouselContainer.style.transform = `translateX(-${currentIndex * 310}px)`;
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % images.length || 0;
+                updateCarousel();
+            }, 3000); // Change image every 3 seconds
+        }
     </script>
 </body>
 </html>
