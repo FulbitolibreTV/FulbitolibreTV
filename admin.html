@@ -22,7 +22,9 @@
             <h2>Hola, bienvenido</h2>
             <h3>Subir imágenes para el carrusel</h3>
             <input type="file" id="imageUpload" accept="image/*" multiple>
+            <input type="number" id="imageDuration" placeholder="Duración en segundos (ej. 3)" min="1">
             <button onclick="uploadImages()">Subir Imágenes</button>
+            <ul id="imageList"></ul>
             <h3>Gestión de Eventos</h3>
             <input type="text" id="eventTime" placeholder="Hora (ej. 21:00)">
             <input type="text" id="eventTitle" placeholder="Título (ej. Copa Sudamericana: Equipo vs Equipo)">
@@ -47,6 +49,7 @@
                 window.location.href = "index.html";
             } else {
                 document.getElementById('adminPanel').style.display = 'block';
+                loadImages();
                 loadEvents();
                 loadAnnouncements();
             }
