@@ -378,6 +378,12 @@ body {
     align-items: center;
 }
 
+.admin-panel li img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
 .admin-panel li button {
     background-color: #d91a2a;
     padding: 5px 10px;
